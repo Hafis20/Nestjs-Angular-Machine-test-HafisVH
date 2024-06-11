@@ -1,1 +1,92 @@
-<p>form works!</p>
+<div class="flex justify-between bg-gray-200">
+    <span mat-dialog-title>Add User</span>
+    <mat-dialog-actions>
+        <mat-icon class="cursor-pointer" mat-dialog-close>close</mat-icon>
+    </mat-dialog-actions>
+</div>
+<mat-dialog-content>
+    <div class="w-full">
+        <form [formGroup]="addUserForm" (ngSubmit)="submit()">
+            <!-- Name  -->
+            <div class="md:grid grid-cols-4 gap-2">
+                <div class="col-span-2 ">
+                    <label for="">Name</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput type="text" formControlName="name">
+                        <mat-icon matSuffix class="mat-18">person</mat-icon>
+                        <mat-error *ngIf="addUserForm.get('name')?.errors">
+                            <ng-container *ngIf="addUserForm.get('name')?.hasError('required')">
+                                **Name is required
+                            </ng-container>
+                            <ng-container
+                                *ngIf="!addUserForm.get('name')?.hasError('required') && addUserForm.get('name')?.hasError('empty')">
+                                **Invalid name
+                            </ng-container>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <!-- Email  -->
+                <div class="col-span-2 ">
+                    <label for="">Email</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput type="text" formControlName="email">
+                        <mat-icon matSuffix class="mat-18">email</mat-icon>
+                        <mat-error *ngIf="addUserForm.get('email')?.errors">
+                            <ng-container *ngIf="addUserForm.get('email')?.hasError('required')">
+                                **Email is required
+                            </ng-container>
+                            <ng-container
+                                *ngIf="!addUserForm.get('email')?.hasError('required') && addUserForm.get('email')?.hasError('email')">
+                                **Invalid email address
+                            </ng-container>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <!-- Mobile  -->
+
+                <div class="col-span-2">
+                    <label for="">Phone</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput type="text" formControlName="phoneNumber">
+                        <mat-icon matSuffix class="mat-18">phone</mat-icon>
+                        <mat-error *ngIf="addUserForm.get('phoneNumber')?.errors">
+                            <ng-container *ngIf="addUserForm.get('phoneNumber')?.hasError('required')">
+                                **Phone number is required
+                            </ng-container>
+                            <ng-container
+                                *ngIf="!addUserForm.get('phoneNumber')?.hasError('required') && addUserForm.get('phoneNumber')?.hasError('empty')">
+                                **Invalid Phone number
+                            </ng-container>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <!-- Address  -->
+                <div class="col-span-2 ">
+                    <label for="">Address</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput type="text" formControlName="address">
+                        <mat-icon matSuffix class="mat-18">badge</mat-icon>
+                        <mat-error *ngIf="addUserForm.get('address')?.errors">
+                            <ng-container *ngIf="addUserForm.get('address')?.hasError('required')">
+                                **Address is required
+                            </ng-container>
+                            <ng-container
+                                *ngIf="!addUserForm.get('address')?.hasError('required') && addUserForm.get('address')?.hasError('empty')">
+                                **Invalid address
+                            </ng-container>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="flex justify-end">
+                <button mat-raised-button color="accent">Save
+                    <mat-icon class="mat-18">save</mat-icon>
+                </button>
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>

@@ -8,7 +8,6 @@ import { CoreModule } from '../core/core.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormComponent } from './components/form/form.component';
 import { TableComponent } from './components/table/table.component';
-import { AddUserDialogComponent } from './components/add-user-dialog/add-user-dialog.component';
 
 
 @NgModule({
@@ -17,7 +16,6 @@ import { AddUserDialogComponent } from './components/add-user-dialog/add-user-di
     DashboardComponent,
     FormComponent,
     TableComponent,
-    AddUserDialogComponent
   ],
   imports: [
     CommonModule,
