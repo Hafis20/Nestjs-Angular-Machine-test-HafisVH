@@ -21,12 +21,13 @@ export class UserController {
     // Route for update a user
     @Put('updateUser')
     updateUser(@Body() updateUserObj: UpdateUserObj, @Req() req: Request) {
+        console.log(updateUserObj)
         return this.userService.updateUser(updateUserObj);
     }
 
     // Route for delete a user
-    @Delete('deleteUser')
-    deleteUser(@Body() userIdObj: UserIdObj) {
+    @Post('deleteUser')
+    deleteUser(@Body() userIdObj: UserIdObj, @Req() req:Request) {
         return this.userService.deleteUser(userIdObj);
     }
 }
