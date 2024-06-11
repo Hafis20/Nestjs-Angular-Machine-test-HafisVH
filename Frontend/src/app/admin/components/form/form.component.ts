@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { emptyValidation } from 'src/app/shared/validations/empty.validation';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -14,12 +13,7 @@ export class FormComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.addUserForm = this.fb.group({
-      name: ['', [Validators.required, emptyValidation()]],
-      email: ['', [Validators.required, Validators.email,]],
-      phoneNumber: ['', [Validators.required, emptyValidation()]],
-      address: ['', [Validators.required, emptyValidation()]],
-    });
+    
   }
 
   submit() {

@@ -1,11 +1,11 @@
-<div class="flex justify-between bg-gray-200">
-    <span mat-dialog-title>Add User</span>
+<div class="flex justify-between bg-red-200">
+    <span mat-dialog-title>Edit User</span>
     <mat-dialog-actions>
         <mat-icon class="cursor-pointer" mat-dialog-close>close</mat-icon>
     </mat-dialog-actions>
 </div>
 <mat-dialog-content>
     <div class="w-full">
-        <app-shared-form [fromAdd]="true"></app-shared-form>
+        <app-shared-form [fromEdit]="true" [userData]="userData"></app-shared-form>
     </div>
 </mat-dialog-content>

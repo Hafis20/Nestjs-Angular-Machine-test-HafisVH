@@ -8,6 +8,7 @@ import { CoreModule } from '../core/core.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormComponent } from './components/form/form.component';
 import { TableComponent } from './components/table/table.component';
+import { EditFormComponent } from './components/edit-form/edit-form.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { TableComponent } from './components/table/table.component';
     DashboardComponent,
     FormComponent,
     TableComponent,
+    EditFormComponent,
   ],
   imports: [
     CommonModule,

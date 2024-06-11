@@ -6,7 +6,7 @@ import { TableComponent } from './components/table/table.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: '', 
     component: AdminComponent,
     children:[
       {

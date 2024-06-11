@@ -35,7 +35,7 @@
                 <ng-container matColumnDef="edit">
                     <th mat-header-cell *matHeaderCellDef> Edit</th>
                     <td mat-cell *matCellDef="let element">  
-                        <mat-icon (click)="editUser(element._id)" class="mat-18 cursor-pointer">edit</mat-icon>
+                        <mat-icon (click)="editUser(element)" class="mat-18 cursor-pointer">edit</mat-icon>
                     </td>
                 </ng-container>
 
@@ -43,7 +43,7 @@
                 <ng-container matColumnDef="delete">
                     <th mat-header-cell *matHeaderCellDef>Delete</th>
                     <td mat-cell *matCellDef="let element">  
-                        <mat-icon class="mat-18 cursor-pointer" color="warn">delete</mat-icon>
+                        <mat-icon (click)="deleteUser(element._id)" class="mat-18 cursor-pointer" color="warn">delete</mat-icon>
                     </td>
                 </ng-container>
 
