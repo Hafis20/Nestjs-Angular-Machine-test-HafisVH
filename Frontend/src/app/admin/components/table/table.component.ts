@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,6 +7,8 @@ import { AlertBoxComponent } from 'src/app/shared/components/alert-box/alert-box
 import { EditFormComponent } from '../edit-form/edit-form.component';
 import { UserOperationsService } from 'src/app/services/user-operations.service';
 import { Subscription } from 'rxjs';
+import { PdfService } from 'src/app/services/pdf.service';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-table',
@@ -29,9 +31,14 @@ export class TableComponent implements OnInit, OnDestroy {
   // For subscription and update the table content
   isAnyChangeOccurSubscription!: Subscription;
 
+  // For showing pdfsrc
+  pdfUrl!: string | null;
+
   constructor(
     private dialog: MatDialog,
-    private userService: UserOperationsService
+    private userService: UserOperationsService,
+    private pdfService: PdfService,
+    private toastr:MessageService
   ) { }
 
   ngOnInit(): void {
@@ -40,8 +47,6 @@ export class TableComponent implements OnInit, OnDestroy {
     })
     this.getAllUsers();
   }
-
-
 
   getAllUsers() {
     this.userService.getAllUsers().subscribe({
@@ -67,6 +72,34 @@ export class TableComponent implements OnInit, OnDestroy {
   deleteUser(userId: string) {
     this.dialog.open(AlertBoxComponent, { data: userId });
   }
+
+  // Generate Pdf
+  generatePDF() {
+    this.pdfService.generatePDF().subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        window.open(url); // Opens the PDF in a new tab
+        this.pdfUrl = url;
+      },
+      error: (error) => {
+        this.toastr.showError('Something went wrong');
+      }
+    });
+  }
+
+  downloadPDF() {
+    if (this.pdfUrl) {
+      const url = this.pdfUrl;
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'generated.pdf';
+      link.click();
+      window.URL.revokeObjectURL(url);
+    } else {
+      this.toastr.showWarning('First generate the pdf');
+    }
+  }
+
 
   ngOnDestroy(): void {
     if (this.isAnyChangeOccurSubscription) {

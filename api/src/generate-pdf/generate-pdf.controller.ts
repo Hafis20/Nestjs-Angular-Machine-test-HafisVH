@@ -1,4 +1,4 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Controller, Get, Req, Res } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';  // Import path module
 import { GeneratePdfService } from './generate-pdf.service';
@@ -10,9 +10,9 @@ export class GeneratePdfController {
 
     // Route for generate the pdf
     @Get('generate')
-    async generatePDF(@Res() res: Response) {
+    async generatePDF(@Res() res: Response,@Req() req:Request) {
         const filePath = await this.pdfService.generatePDF();
-        
+
         res.set({
             'Content-Type': 'application/pdf',
             'Content-Disposition': `attachment; filename="${path.basename(filePath)}"`,

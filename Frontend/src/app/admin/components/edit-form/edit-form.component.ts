@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { UserObj } from 'src/app/schemas/user.dto';
+import { MessageService } from 'src/app/services/message.service';
 import { UserOperationsService } from 'src/app/services/user-operations.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class EditFormComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: UserObj,
     private userService: UserOperationsService,
-    private dialog:MatDialog
+    private dialog:MatDialog,
+    private toastr:MessageService
   ) { }
 
   userData!: UserObj;
@@ -36,6 +38,7 @@ export class EditFormComponent implements OnInit {
     this.userService.editUser(user).subscribe({
       next: (res) => {
         console.log(res);
+        this.toastr.showSuccess('Successfully Edited');
         this.userService.setAnyChangeOccur(true);
       },
       error: (err) => {

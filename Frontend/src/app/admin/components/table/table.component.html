@@ -1,4 +1,4 @@
-<mat-card class="mt-2 md:h-[420px]">
+<mat-card class="mt-2 md:h-[430px]">
     <mat-card-header>
         <mat-card-title>Users List</mat-card-title>
 
@@ -34,7 +34,7 @@
                 <!-- Edit Column -->
                 <ng-container matColumnDef="edit">
                     <th mat-header-cell *matHeaderCellDef> Edit</th>
-                    <td mat-cell *matCellDef="let element">  
+                    <td mat-cell *matCellDef="let element">
                         <mat-icon (click)="editUser(element)" class="mat-18 cursor-pointer">edit</mat-icon>
                     </td>
                 </ng-container>
@@ -42,8 +42,9 @@
                 <!-- Delete Column -->
                 <ng-container matColumnDef="delete">
                     <th mat-header-cell *matHeaderCellDef>Delete</th>
-                    <td mat-cell *matCellDef="let element">  
-                        <mat-icon (click)="deleteUser(element._id)" class="mat-18 cursor-pointer" color="warn">delete</mat-icon>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-icon (click)="deleteUser(element._id)" class="mat-18 cursor-pointer"
+                            color="warn">delete</mat-icon>
                     </td>
                 </ng-container>
 
@@ -52,13 +53,23 @@
             </table>
         </div>
     </mat-card-content>
-    <mat-card-footer>
-        <mat-paginator  #paginator
-            [length]="length" 
-            [pageSize]="5" 
-            [pageSizeOptions]="[5, 10, 25, 100]" 
-            [showFirstLastButtons]="true"
-            >
+    <mat-card-footer class="md:flex justify-between items-center mx-2">
+
+        <div class="flex gap-2 mt-3">
+            <!-- Generate Pdf button  -->
+            <button mat-raised-button color="primary" (click)="generatePDF()">Generate PDF
+                <mat-icon class="mat-18">picture_as_pdf</mat-icon>
+            </button>
+
+            <button mat-raised-button color="accent" (click)="downloadPDF()">Download PDF
+                <mat-icon class="mat-18">download</mat-icon>
+            </button>
+        </div>
+
+        <mat-paginator #paginator [length]="length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"
+            [showFirstLastButtons]="true">
         </mat-paginator>
+
+
     </mat-card-footer>
 </mat-card>
