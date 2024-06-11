@@ -10,10 +10,7 @@ import { FormComponent } from '../form/form.component';
 export class DashboardComponent implements OnInit {
   constructor(private dialog: MatDialog) { }
 
-  ngOnInit(): void {
-
-  }
-
+  ngOnInit(): void {}
   // when the user click on add user
   openAddUserDialog() {
     this.dialog.open(FormComponent);

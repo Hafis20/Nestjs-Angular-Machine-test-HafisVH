@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UserObj } from 'src/app/schemas/user.dto';
 import { AlertBoxComponent } from 'src/app/shared/components/alert-box/alert-box.component';
 import { EditFormComponent } from '../edit-form/edit-form.component';
+import { UserOperationsService } from 'src/app/services/user-operations.service';
 
 @Component({
   selector: 'app-table',
@@ -25,9 +26,19 @@ export class TableComponent implements OnInit, AfterViewInit {
   // Data from backend
   userData!: UserObj[];
 
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog,
+    private userService: UserOperationsService
+  ) { }
 
   ngOnInit(): void {
+
+    this.userService.getAllUsers().subscribe({
+      next: (res) => {
+        console.log(res);
+      }
+    })
+
     this.userData =
       [
         {
@@ -111,13 +122,12 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   editUser(userData: UserObj) {
-    this.dialog.open(EditFormComponent,{
-      data:userData
+    this.dialog.open(EditFormComponent, {
+      data: userData
     });
   }
 
   deleteUser(userId: string) {
-    console.log(userId);
-    this.dialog.open(AlertBoxComponent);
+    this.dialog.open(AlertBoxComponent, { data: userId });
   }
 }

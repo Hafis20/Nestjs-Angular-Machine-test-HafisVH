@@ -1,7 +1,8 @@
-import { Component, Input, OnInit, SkipSelf } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SkipSelf } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { emptyValidation } from '../../validations/empty.validation';
 import { UserObj } from 'src/app/schemas/user.dto';
+import { UserOperationsService } from 'src/app/services/user-operations.service';
 
 @Component({
   selector: 'app-shared-form',
@@ -20,10 +21,13 @@ export class SharedFormComponent implements OnInit {
   @Input() fromAdd: boolean = false;
   @Input() fromEdit: boolean = false;
   @Input() userData!: UserObj;  // In case of edit user
+  @Output() submitEvent: EventEmitter<UserObj> = new EventEmitter<UserObj>();
 
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -46,10 +50,8 @@ export class SharedFormComponent implements OnInit {
   }
 
   submit() {
-    if (this.fromAdd) {
-      console.log(this.form);
-    } else {
-      console.log(this.form);
+    if(this.form.valid){
+      this.submitEvent.emit(this.form.value);
     }
   }
 }

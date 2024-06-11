@@ -6,6 +6,8 @@
 </div>
 <mat-dialog-content>
     <div class="w-full">
-        <app-shared-form [fromEdit]="true" [userData]="userData"></app-shared-form>
+        
+        <!-- Edit Form  -->
+        <app-shared-form [fromEdit]="true" [userData]="userData" (submitEvent)="edit($event)"></app-shared-form>
     </div>
 </mat-dialog-content>
